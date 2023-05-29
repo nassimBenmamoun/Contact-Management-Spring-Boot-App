@@ -7,6 +7,8 @@
 <html>
 <head>
 <title>List of groupes</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -14,10 +16,6 @@
 	crossorigin="anonymous">
 
 <style>
-h3 {
-	margin-top: 20px;
-}
-
 #navbarNav div {
 	height: 0;
 }
@@ -49,18 +47,11 @@ form {
 			<div class="collapse navbar-collapse justify-content-end"
 				id="navbarSupportedContent">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page"
-						href="${pageContext.request.contextPath}/showForm">Home</a></li>
+
 
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/showForm">Add
-							Contacts </a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/showContactsOrderedByNom">Order
-							By Name </a></li>
-
+						href="${pageContext.request.contextPath}/showForm">Add Contact
+					</a></li>
 
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/manageContacts">Manage
@@ -79,48 +70,66 @@ form {
 	</nav>
 	<div class="container">
 
-		<div>
-			<h3>List of Groupes</h3>
-		</div>
+		<div class="row my-4">
+			<div class="col">
 
-		<form action="${pageContext.request.contextPath}/searchGroupeByNom"
-			class="d-flex" method="POST">
-			<input name="nom" class="form-control me-2" type="search"
-				placeholder="Nom Groupe" aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
-		</form>
+				<div class="card">
+					<h3 class="card-header text-center">Liste des Groupes</h3>
+					<div class="card-body bg-light">
 
-		<div>
 
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">Nom</th>
-						<th scope="col">Contacts</th>
-						<th scope="col">Actions</th>
-					</tr>
-				</thead>
-				<c:forEach items="${groupeList}" var="g">
-					<tr>
-						<td><c:out value="${g.nom}" /></td>
-						<td>
-							<ul>
-								<c:forEach items="${g.contacts}" var="c">
-									<li><c:out value="${c.nom} ${c.prenom}" /></li>
+
+
+						<form
+							action="${pageContext.request.contextPath}/searchGroupeByNom"
+							class="d-flex flex-row mb-2" method="POST">
+							<div class="input-group">
+								<input name="nom" class="form-control form-control-md"
+									type="search" placeholder="Nom Groupe" aria-label="Search">
+								<button class="btn btn-info btn-md" type="submit">
+									<i class="fas fa-search text-white"></i>
+								</button>
+							</div>
+						</form>
+
+
+						<div class="table-responsive mt-4">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Nom</th>
+										<th scope="col">Contacts</th>
+										<th scope="col">Actions</th>
+									</tr>
+								</thead>
+								<c:forEach items="${groupeList}" var="g">
+									<tr>
+										<td><c:out value="${g.nom}" /></td>
+										<td>
+											<ul>
+												<c:forEach items="${g.contacts}" var="c">
+													<li><c:out value="${c.nom} ${c.prenom}" /></li>
+												</c:forEach>
+											</ul>
+										</td>
+										<td><a href="deleteGroupe/${g.id}"
+											class="btn btn-sm btn-danger"><i class="fa fa-trash me-2"></i>Delete</a>
+
+										</td>
+									</tr>
+
 								</c:forEach>
-							</ul>
-						</td>
-						<td>
-							<ul>
-								<li><a href="deleteGroupe/${g.id}">Delete</a></li>
-							</ul>
-						</td>
-					</tr>
 
-				</c:forEach>
-
-			</table>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
+
+
+
 	</div>
 </body>
 </html>
