@@ -28,6 +28,10 @@ public interface IContactService {
 	public List<Groupe> getAllGroupes();
 	
 	public void addGroupe(Groupe pGroupe);
+	
+	public void deleteGroupe(Long id); 
+	
+	public List<Groupe> getGroupesByNom(String nom);
 
 
 }

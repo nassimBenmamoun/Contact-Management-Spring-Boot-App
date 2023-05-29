@@ -59,7 +59,7 @@ public class ContactServiceImpl implements IContactService{
 
 	@Override
 	public List<Contact> getContactsByNom(String nom) {
-		List<Contact> l = contactDao.findByNom(nom);
+		List<Contact> l = contactDao.findByNomIgnoreCase(nom);
 		return l != null && !l.isEmpty() ? l : null;
 	}
 
@@ -79,6 +79,8 @@ public class ContactServiceImpl implements IContactService{
 		return list;
 	}
 
+	
+
 
 	// GROUPE Management
 	
@@ -94,5 +96,25 @@ public class ContactServiceImpl implements IContactService{
 		groupeDao.save(pGroupe);
 		
 	}
+
+
+
+	@Override
+	public void deleteGroupe(Long id) {
+		
+		groupeDao.deleteById(id);
+	}
+
+
+
+	@Override
+	public List<Groupe> getGroupesByNom(String nom) {
+		List<Groupe> l = groupeDao.findByNom(nom);
+		return l != null && !l.isEmpty() ? l : null;
+	}
+
+
+
+	
 
 }

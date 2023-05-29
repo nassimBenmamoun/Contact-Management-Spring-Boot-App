@@ -36,12 +36,17 @@ form {
 
 </head>
 <body>
-	<div class="container">
 
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="collapse navbar-collapse" id="navbarNav">
+	<nav
+		class="navbar navbar-expand-lg navbar-light navbar-dark bg-primary px-3">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/showForm"> <i class="fas fa-mobile"
+				style="color: #ffffff"></i> <span class="fw-bold">CM</span>
+			</a>
+
+			<div class="collapse navbar-collapse justify-content-end"
+				id="navbarSupportedContent">
 				<ul class="navbar-nav">
-
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page"
 						href="${pageContext.request.contextPath}/showForm">Home</a></li>
@@ -58,36 +63,19 @@ form {
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/manageContacts">Manage
 							Contacts </a></li>
-							
+
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/showFormGroupe">Add Groupe </a></li>
+						href="${pageContext.request.contextPath}/showFormGroupe">Add
+							Groupe </a></li>
 
-					<li class="nav-item"><form
-							action="${pageContext.request.contextPath}/searchContactByNom"
-							class="d-flex" method="POST">
-							<input name="nom" class="form-control me-2" type="search"
-								placeholder="Nom" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form></li>
-
-					<li class="nav-item"><form
-							action="${pageContext.request.contextPath}/searchContactByTel"
-							class="d-flex" method="POST">
-							<input name="tel" class="form-control me-2" type="search"
-								placeholder="Telephone" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form></li>
-
-
-
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/manageGroupes">Manage
+							Groupes </a></li>
 				</ul>
-
-
-
 			</div>
-
-
-		</nav>
+		</div>
+	</nav>
+	<div class="container">
 
 
 

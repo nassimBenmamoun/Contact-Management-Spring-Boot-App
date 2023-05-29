@@ -24,7 +24,7 @@ public class Groupe {
 	@NotBlank(message = "This field is required")
 	String nom;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
 	@JoinColumn(name = "id_groupe")
 	private List<Contact> contacts = new ArrayList<Contact>();
 

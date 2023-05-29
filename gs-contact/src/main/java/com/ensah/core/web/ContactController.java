@@ -157,5 +157,33 @@ public class ContactController {
 
 		return "groupeform";
 	}
+	
+	@RequestMapping("/manageGroupes")
+	public String manageGroupes(Model model) {
+		
+		model.addAttribute("groupeList", contactService.getAllGroupes());
+		
+		return "listGroupes";
+	}
+	
+	@RequestMapping(value = "/deleteGroupe/{id}", method = RequestMethod.GET)
+	public String deleteGroupe(@PathVariable int id) {
+		
+		contactService.deleteGroupe(Long.valueOf(id));
+		
+		return "redirect:/manageGroupes";
+		
+	}
+	
+	@PostMapping(value = "searchGroupeByNom")
+	public String searchGroupeByNom(@RequestParam String nom, Model model) {
+		
+		List<Groupe> list = contactService.getGroupesByNom(nom);
+		
+		model.addAttribute("groupeList", list);
+		
+		return "listGroupes";
+		
+	}
 
 }

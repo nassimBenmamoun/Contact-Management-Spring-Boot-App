@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>List of contacts</title>
+<title>List of groupes</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -37,12 +37,13 @@ form {
 
 </head>
 <body>
-
 	<nav
 		class="navbar navbar-expand-lg navbar-light navbar-dark bg-primary px-3">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="${pageContext.request.contextPath}/showForm"> <i class="fas fa-mobile"
-				style="color: #ffffff"></i> <span class="fw-bold">CM</span>
+			<a class="navbar-brand"
+				href="${pageContext.request.contextPath}/showForm"> <i
+				class="fas fa-mobile" style="color: #ffffff"></i> <span
+				class="fw-bold">CM</span>
 			</a>
 
 			<div class="collapse navbar-collapse justify-content-end"
@@ -78,22 +79,14 @@ form {
 	</nav>
 	<div class="container">
 
-
-
 		<div>
-			<h3>List of Contacts</h3>
+			<h3>List of Groupes</h3>
 		</div>
-		
-		<form action="${pageContext.request.contextPath}/searchContactByNom"
+
+		<form action="${pageContext.request.contextPath}/searchGroupeByNom"
 			class="d-flex" method="POST">
 			<input name="nom" class="form-control me-2" type="search"
-				placeholder="Nom Contact" aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
-		</form>
-		<form action="${pageContext.request.contextPath}/searchContactByTel"
-			class="d-flex" method="POST">
-			<input name="tel" class="form-control me-2" type="search"
-				placeholder="Telephone" aria-label="Search">
+				placeholder="Nom Groupe" aria-label="Search">
 			<button class="btn btn-outline-success" type="submit">Search</button>
 		</form>
 
@@ -103,33 +96,23 @@ form {
 				<thead>
 					<tr>
 						<th scope="col">Nom</th>
-						<th scope="col">Prénom</th>
-						<th scope="col">Télé 1</th>
-						<th scope="col">Télé 2</th>
-						<th scope="col">Email Personnel</th>
-						<th scope="col">Email Professionnel</th>
-						<th scope="col">Adresse</th>
-						<th scope="col">Genre</th>
+						<th scope="col">Contacts</th>
 						<th scope="col">Actions</th>
-
-
 					</tr>
 				</thead>
-				<c:forEach items="${contactList}" var="c">
+				<c:forEach items="${groupeList}" var="g">
 					<tr>
-						<td><c:out value="${c.nom}" /></td>
-						<td><c:out value="${c.prenom}" /></td>
-						<td><c:out value="${c.tel1}" /></td>
-						<td><c:out value="${c.tel2}" /></td>
-						<td><c:out value="${c.email_perso}" /></td>
-						<td><c:out value="${c.email_pro}" /></td>
-						<td><c:out value="${c.adresse}" /></td>
-						<td><c:out value="${c.genre}" /></td>
+						<td><c:out value="${g.nom}" /></td>
 						<td>
 							<ul>
-								<li><a href="deleteContact/${c.id}">Delete</a></li>
-
-								<li><a href="updateContactForm/${c.id}">Update</a></li>
+								<c:forEach items="${g.contacts}" var="c">
+									<li><c:out value="${c.nom} ${c.prenom}" /></li>
+								</c:forEach>
+							</ul>
+						</td>
+						<td>
+							<ul>
+								<li><a href="deleteGroupe/${g.id}">Delete</a></li>
 							</ul>
 						</td>
 					</tr>
