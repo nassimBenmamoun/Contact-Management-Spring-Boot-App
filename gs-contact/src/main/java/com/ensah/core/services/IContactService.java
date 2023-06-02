@@ -23,6 +23,8 @@ public interface IContactService {
 	
 	public List<Contact> getContactsOrderByNomAsc();
 	
+	public List<Contact> getContactsByPhoneticNom(String nom);
+	
 	
 	// GROUPE Management
 	public List<Groupe> getAllGroupes();

@@ -15,79 +15,26 @@
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
 
-<style>
-#navbarNav div {
-	height: 0;
-}
-
-#navbarNav form {
-	margin: 0;
-	padding: 0;
-}
-
-form {
-	margin-bottom: 60px;
-	margin-top: 10px;
-	padding: 10px;
-}
-</style>
 
 </head>
 <body>
 
 
-	<nav
-		class="navbar navbar-expand-lg navbar-light navbar-dark bg-primary px-3">
-		<div class="container-fluid">
-			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/showForm"> <i
-				class="fas fa-mobile" style="color: #ffffff"></i> <span
-				class="fw-bold">CM</span>
-			</a>
-
-			<div class="collapse navbar-collapse justify-content-end"
-				id="navbarSupportedContent">
-				<ul class="navbar-nav">
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/showForm">Add Contact
-					</a></li>
-
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/manageContacts">Manage
-							Contacts </a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/showFormGroupe">Add
-							Groupe </a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/manageGroupes">Manage
-							Groupes </a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<%@ include file="header.jsp" %>
 
 
 	<div class="container">
 
-
-
-
-
-
 		<div class="row my-4">
-			<div class="col-md-10 mx-auto">
+			<div class="col-md-10 mx-auto ">
 				<c:if test="${infoMsg!=null}">
 					<div class="alert alert-success" role="alert">${infoMsg}</div>
 				</c:if>
 				<c:if test="${errorMsg!=null}">
 					<div class="alert alert-danger" role="alert">${errorMsg}</div>
 				</c:if>
-				<div class="card">
-					<h3 class="card-header text-center">Ajouter un Contact</h3>
+				<div class="card rounded-3 shadow-lg">
+					<h3 class="card-header text-center display-6 fw-normal">Ajouter un Contact</h3>
 					<div class="card-body bg-light">
 
 						<f:form action="addContact" method="POST"
@@ -176,8 +123,8 @@ form {
 
 
 							<div style="text-align: right" class="mt-3">
-								<button type="submit" class="btn btn-primary">Confirm</button>
-								<button type="reset" class="btn btn-secondary">Reset</button>
+								<button type="submit" class="btn rounded-pill text-white" style="background-color: #b055ff">Confirm</button>
+								<button type="reset" class="btn btn-secondary rounded-pill">Reset</button>
 							</div>
 
 						</f:form>

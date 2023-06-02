@@ -105,6 +105,17 @@ public class ContactController {
 		
 	}
 	
+	@PostMapping(value = "searchContactByPhoneticNom")
+	public String searchContactByPhoneticNom(@RequestParam String nom, Model model) {
+		
+		List<Contact> list = contactService.getContactsByPhoneticNom(nom);
+		
+		model.addAttribute("contactList", list);
+		
+		return "listContacts";
+		
+	}
+	
 	
 	@PostMapping(value = "searchContactByTel")
 	public String searchContactByTel(@RequestParam String tel, Model model) {

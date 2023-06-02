@@ -62,7 +62,12 @@ public class ContactServiceImpl implements IContactService{
 		List<Contact> l = contactDao.findByNomIgnoreCase(nom);
 		return l != null && !l.isEmpty() ? l : null;
 	}
-
+	
+	@Override
+	public List<Contact> getContactsByPhoneticNom(String nom) {
+		List<Contact> l = contactDao.findByPhoneticNom(nom);
+		return l != null && !l.isEmpty() ? l : null;
+	}
 
 	@Override
 	public Contact getContactByTel(String tel) {
@@ -113,6 +118,9 @@ public class ContactServiceImpl implements IContactService{
 		return l != null && !l.isEmpty() ? l : null;
 	}
 
+
+
+	
 
 
 	

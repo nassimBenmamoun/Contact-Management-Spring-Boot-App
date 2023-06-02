@@ -15,78 +15,26 @@
 	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
 	crossorigin="anonymous">
 
-<style>
-#navbarNav div {
-	height: 0;
-}
-
-#navbarNav form {
-	margin: 0;
-	padding: 0;
-}
-
-form {
-	margin-bottom: 60px;
-	margin-top: 10px;
-	padding: 10px;
-}
-</style>
-
 
 </head>
 <body>
-	<nav
-		class="navbar navbar-expand-lg navbar-light navbar-dark bg-primary px-3">
-		<div class="container-fluid">
-			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/showForm"> <i
-				class="fas fa-mobile" style="color: #ffffff"></i> <span
-				class="fw-bold">CM</span>
-			</a>
-
-			<div class="collapse navbar-collapse justify-content-end"
-				id="navbarSupportedContent">
-				<ul class="navbar-nav">
-
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/showForm">Add Contact
-					</a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/manageContacts">Manage
-							Contacts </a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/showFormGroupe">Add
-							Groupe </a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/manageGroupes">Manage
-							Groupes </a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<%@ include file="header.jsp" %>
 	<div class="container">
 
 		<div class="row my-4">
 			<div class="col">
 
-				<div class="card">
-					<h3 class="card-header text-center">Liste des Groupes</h3>
-					<div class="card-body bg-light">
-
-
-
+				<div class="card rounded-3 shadow-lg">
+					<h3 class="card-header text-center display-6 fw-normal">Liste des Groupes</h3>
+					<div class="card-body bg-light pt-4">
 
 						<form
 							action="${pageContext.request.contextPath}/searchGroupeByNom"
 							class="d-flex flex-row mb-2" method="POST">
 							<div class="input-group">
-								<input name="nom" class="form-control form-control-md"
+								<input name="nom" class="form-control form-control-md rounded-pill rounded-end"
 									type="search" placeholder="Nom Groupe" aria-label="Search">
-								<button class="btn btn-info btn-md" type="submit">
+								<button class="btn btn-md rounded-pill rounded-start" type="submit" style="background-color: #b055ff">
 									<i class="fas fa-search text-white"></i>
 								</button>
 							</div>
@@ -106,14 +54,14 @@ form {
 									<tr>
 										<td><c:out value="${g.nom}" /></td>
 										<td>
-											<ul>
+											<ul class="list-group list-group-flush">
 												<c:forEach items="${g.contacts}" var="c">
-													<li><c:out value="${c.nom} ${c.prenom}" /></li>
+													<li class="list-group-item bg-light border-light"><c:out value="${c.nom} ${c.prenom}" /></li>
 												</c:forEach>
 											</ul>
 										</td>
 										<td><a href="deleteGroupe/${g.id}"
-											class="btn btn-sm btn-danger"><i class="fa fa-trash me-2"></i>Delete</a>
+											class="btn btn-sm btn-danger rounded-pill"><i class="fa fa-trash me-2"></i>Delete</a>
 
 										</td>
 									</tr>
