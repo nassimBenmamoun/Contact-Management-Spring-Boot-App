@@ -120,6 +120,24 @@ public class ContactServiceImpl implements IContactService{
 
 
 
+	@Override
+	public Groupe getGroupeById(Long id) {
+		return groupeDao.findById(id).get();
+	}
+
+
+
+	@Override
+	public void updateGroupe(Groupe pGroupe) {
+		groupeDao.save(pGroupe);
+	}
+
+
+
+	
+
+
+
 	
 
 

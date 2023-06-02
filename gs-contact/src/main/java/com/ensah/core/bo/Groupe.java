@@ -20,13 +20,14 @@ public class Groupe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	
-	@Column(unique = true)
+	
 	@NotBlank(message = "This field is required")
 	String nom;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "id_groupe")
 	private List<Contact> contacts = new ArrayList<Contact>();
+	
 
 	
 	@Override

@@ -69,7 +69,7 @@ public class ContactController {
 	
 	
 	@RequestMapping(value = "/updateContactForm/{id}", method = RequestMethod.GET)
-	public String updatePersonForm(@PathVariable int id, Model model) {
+	public String updateContactForm(@PathVariable int id, Model model) {
 
 		model.addAttribute("contactModel", contactService.getContactById(Long.valueOf(id)));
 		
@@ -195,6 +195,32 @@ public class ContactController {
 		
 		return "listGroupes";
 		
+	}
+	
+	@RequestMapping(value = "/updateGroupeForm/{id}", method = RequestMethod.GET)
+	public String updateGroupeForm(@PathVariable int id, Model model) {
+
+		model.addAttribute("groupeModel", contactService.getGroupeById(Long.valueOf(id)));
+		model.addAttribute("contactList", contactService.getAllContacts());
+		
+
+		return "updateGroupeForm";
+	}
+	
+	@RequestMapping("/updateGroupe")
+	public String updateGroupe(@Valid @ModelAttribute("groupeModel") Groupe groupe, BindingResult bindingResult ,Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			
+			return "updateGroupeForm";
+		}
+		
+		contactService.updateGroupe(groupe);
+
+		model.addAttribute("groupeList", contactService.getAllGroupes());
+		
+		return "redirect:/manageGroupes";
+
 	}
 
 }

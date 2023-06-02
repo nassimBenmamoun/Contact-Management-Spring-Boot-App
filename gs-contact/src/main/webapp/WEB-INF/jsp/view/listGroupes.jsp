@@ -18,23 +18,26 @@
 
 </head>
 <body>
-	<%@ include file="header.jsp" %>
+	<%@ include file="header.jsp"%>
 	<div class="container">
 
 		<div class="row my-4">
 			<div class="col">
 
 				<div class="card rounded-3 shadow-lg">
-					<h3 class="card-header text-center display-6 fw-normal">Liste des Groupes</h3>
+					<h3 class="card-header text-center display-6 fw-normal">Liste
+						des Groupes</h3>
 					<div class="card-body bg-light pt-4">
 
 						<form
 							action="${pageContext.request.contextPath}/searchGroupeByNom"
 							class="d-flex flex-row mb-2" method="POST">
 							<div class="input-group">
-								<input name="nom" class="form-control form-control-md rounded-pill rounded-end"
+								<input name="nom"
+									class="form-control form-control-md rounded-pill rounded-end"
 									type="search" placeholder="Nom Groupe" aria-label="Search">
-								<button class="btn btn-md rounded-pill rounded-start" type="submit" style="background-color: #b055ff">
+								<button class="btn btn-md rounded-pill rounded-start"
+									type="submit" style="background-color: #b055ff">
 									<i class="fas fa-search text-white"></i>
 								</button>
 							</div>
@@ -56,14 +59,19 @@
 										<td>
 											<ul class="list-group list-group-flush">
 												<c:forEach items="${g.contacts}" var="c">
-													<li class="list-group-item bg-light border-light"><c:out value="${c.nom} ${c.prenom}" /></li>
+													<li class="list-group-item bg-light border-light"><c:out
+															value="${c.nom} ${c.prenom}" /></li>
 												</c:forEach>
 											</ul>
 										</td>
-										<td><a href="deleteGroupe/${g.id}"
-											class="btn btn-sm btn-danger rounded-pill"><i class="fa fa-trash me-2"></i>Delete</a>
-
-										</td>
+										<td><a href="updateGroupeForm/${g.id}"
+											class="btn btn-sm rounded-pill text-white me-3"
+											style="background-color: #f67717"><i
+												class="fa fa-edit me-2 text-white"></i>Update</a> <a
+											href="deleteGroupe/${g.id}"
+											class="btn btn-sm rounded-pill text-white"
+											style="background-color: #881d2d"><i
+												class="fa fa-trash me-2 text-white"></i>Delete</a></td>
 									</tr>
 
 								</c:forEach>

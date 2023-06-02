@@ -34,6 +34,12 @@ public interface IContactService {
 	public void deleteGroupe(Long id); 
 	
 	public List<Groupe> getGroupesByNom(String nom);
+	
+	public Groupe getGroupeById(Long id);
+	
+	public void updateGroupe(Groupe pGroupe);
+	
+
 
 
 }
