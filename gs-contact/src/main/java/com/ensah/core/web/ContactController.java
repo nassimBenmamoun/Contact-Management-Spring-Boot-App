@@ -39,13 +39,34 @@ public class ContactController {
 	public String process(@Valid @ModelAttribute("contactModel") Contact contact, BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("errorMsg", "Les données sont invalides.");
+			model.addAttribute("errorMsg", "Invalid data.");
 		}else {
 			contactService.addContact(contact);
-			model.addAttribute("infoMsg", "Contact ajouté avec succès");
+			model.addAttribute("infoMsg", "Contact added successfully.");
+			
+			// Ajout automatique du groupe
+			
+			//1. Récuperer le nom du contact
+			String nomContact = contact.getNom();
+			
+			//2. Récuperer le groupe à partir du nom contact
+			List<Groupe> l = contactService.getGroupesByNom(nomContact);
+			
+			//3. Si le groupe est null, Creer un nouveau groupe et ajouter le contact
+			if(l == null) {
+				Groupe g = new Groupe();
+				g.setNom(nomContact);
+				g.addContact(contact);
+				contactService.addGroupe(g);
+			}//4. Sinon, ajouter le contact et puis modifier le groupe
+			else {
+				Groupe g = l.get(0);
+				g.addContact(contact);
+				contactService.updateGroupe(g);
+			}
+			
 		}
 		
-		model.addAttribute("contactList", contactService.getAllContacts());
 
 		return "form";
 	}
@@ -99,16 +120,16 @@ public class ContactController {
 		
 		List<Contact> list = contactService.getContactsByNom(nom);
 		
-		model.addAttribute("contactList", list);
+		if(list == null) {
+			
+			list = contactService.getContactsByPhoneticNom(nom);
+			
+			if(list == null) {
+				
+				list = contactService.getContactsByNomWithMistakes(nom);
+			}
+		}
 		
-		return "listContacts";
-		
-	}
-	
-	@PostMapping(value = "searchContactByPhoneticNom")
-	public String searchContactByPhoneticNom(@RequestParam String nom, Model model) {
-		
-		List<Contact> list = contactService.getContactsByPhoneticNom(nom);
 		
 		model.addAttribute("contactList", list);
 		
@@ -141,7 +162,36 @@ public class ContactController {
 		return "listContacts";
 	}
 	
+	/*
+	 * @PostMapping(value = "searchContactByPhoneticNom") public String
+	 * searchContactByPhoneticNom(@RequestParam String nom, Model model) {
+	 * 
+	 * List<Contact> list = contactService.getContactsByPhoneticNom(nom);
+	 * 
+	 * model.addAttribute("contactList", list);
+	 * 
+	 * return "listContacts";
+	 * 
+	 * }
+	 */
 	
+	/*
+	 * @PostMapping(value = "searchContactByNomWithMistakes") public String
+	 * searchContactByNomWithMistakes(@RequestParam String nom, Model model) {
+	 * 
+	 * List<Contact> list = contactService.getContactsByNomWithMistakes(nom);
+	 * 
+	 * model.addAttribute("contactList", list);
+	 * 
+	 * return "listContacts";
+	 * 
+	 * }
+	 */
+	
+	
+	
+	
+	// Manage Groupes
 	
 	@RequestMapping("/showFormGroupe")
 	public String showFormGroupe(Model model) {
@@ -157,10 +207,10 @@ public class ContactController {
 	public String addGroupe(@Valid @ModelAttribute("groupeModel") Groupe groupe, BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("errorMsg", "Les données sont invalides.");
+			model.addAttribute("errorMsg", "Invalid data.");
 		}else {
 			contactService.addGroupe(groupe);
-			model.addAttribute("infoMsg", "Groupe ajouté avec succès");
+			model.addAttribute("infoMsg", "Group added successfully.");
 		}
 		
 		model.addAttribute("groupeList", contactService.getAllGroupes());

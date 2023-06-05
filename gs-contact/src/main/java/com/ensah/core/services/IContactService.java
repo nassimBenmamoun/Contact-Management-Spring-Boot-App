@@ -25,6 +25,8 @@ public interface IContactService {
 	
 	public List<Contact> getContactsByPhoneticNom(String nom);
 	
+	public List<Contact> getContactsByNomWithMistakes(String nom);
+	
 	
 	// GROUPE Management
 	public List<Groupe> getAllGroupes();

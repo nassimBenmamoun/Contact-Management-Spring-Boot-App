@@ -1,5 +1,6 @@
 package com.ensah.core.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -85,6 +86,62 @@ public class ContactServiceImpl implements IContactService{
 	}
 
 	
+	@Override
+	public List<Contact> getContactsByNomWithMistakes(String nom) {
+		List<Contact> allContacts = contactDao.findAll();
+        List<Contact> matchedContacts = new ArrayList<>();
+
+        for (Contact contact : allContacts) {
+            String contactName = contact.getNom().toLowerCase();
+            int editDistance = calculateEditDistance(nom.toLowerCase(), contactName);
+            
+            // Définissez une valeur de seuil pour déterminer si le contact est une correspondance suffisante
+            int threshold = 3;
+
+            if (editDistance <= threshold) {
+                matchedContacts.add(contact);
+            }
+        }
+
+        return matchedContacts;
+	}
+	
+	private int calculateEditDistance(String str1, String str2) {
+		int m = str1.length();
+        int n = str2.length();
+
+        // Create a matrix to store the edit distances
+        int[][] dp = new int[m + 1][n + 1];
+
+        // Initialize the first row and column of the matrix
+        for (int i = 0; i <= m; i++) {
+            dp[i][0] = i;
+        }
+        for (int j = 0; j <= n; j++) {
+            dp[0][j] = j;
+        }
+
+        // Fill in the matrix using dynamic programming
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                // If the characters are the same, no operation needed
+                if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    // Calculate the cost of deletion, insertion, and substitution
+                    int deletionCost = dp[i - 1][j] + 1;
+                    int insertionCost = dp[i][j - 1] + 1;
+                    int substitutionCost = dp[i - 1][j - 1] + 1;
+
+                    // Choose the minimum cost among the three options
+                    dp[i][j] = Math.min(deletionCost, Math.min(insertionCost, substitutionCost));
+                }
+            }
+        }
+
+        // The bottom-right cell of the matrix contains the edit distance
+        return dp[m][n];
+    }
 
 
 	// GROUPE Management
@@ -132,6 +189,9 @@ public class ContactServiceImpl implements IContactService{
 		groupeDao.save(pGroupe);
 	}
 
+
+
+	
 
 
 	
