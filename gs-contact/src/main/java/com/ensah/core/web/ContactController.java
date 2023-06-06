@@ -30,7 +30,6 @@ public class ContactController {
 	public String showForm(Model model) {
 		
 		model.addAttribute("contactModel", new Contact());
-		model.addAttribute("contactList", contactService.getAllContacts());
 		
 		return "form";
 	}
@@ -86,6 +85,10 @@ public class ContactController {
 		
 		return "redirect:/manageContacts";
 		
+		//sinon
+		// model.addAttribute("contactList", contactService.getAllContacts());
+		// return "listContacts";
+		
 	}
 	
 	
@@ -108,7 +111,6 @@ public class ContactController {
 		
 		contactService.updateContact(contact);
 
-		model.addAttribute("contactList", contactService.getAllContacts());
 		
 		return "redirect:/manageContacts";
 
@@ -162,32 +164,6 @@ public class ContactController {
 		return "listContacts";
 	}
 	
-	/*
-	 * @PostMapping(value = "searchContactByPhoneticNom") public String
-	 * searchContactByPhoneticNom(@RequestParam String nom, Model model) {
-	 * 
-	 * List<Contact> list = contactService.getContactsByPhoneticNom(nom);
-	 * 
-	 * model.addAttribute("contactList", list);
-	 * 
-	 * return "listContacts";
-	 * 
-	 * }
-	 */
-	
-	/*
-	 * @PostMapping(value = "searchContactByNomWithMistakes") public String
-	 * searchContactByNomWithMistakes(@RequestParam String nom, Model model) {
-	 * 
-	 * List<Contact> list = contactService.getContactsByNomWithMistakes(nom);
-	 * 
-	 * model.addAttribute("contactList", list);
-	 * 
-	 * return "listContacts";
-	 * 
-	 * }
-	 */
-	
 	
 	
 	
@@ -198,7 +174,7 @@ public class ContactController {
 		
 		model.addAttribute("contactList", contactService.getAllContacts());
 		model.addAttribute("groupeModel", new Groupe());
-		model.addAttribute("groupeList", contactService.getAllGroupes());
+		
 		
 		return "groupeform";
 	}
@@ -213,7 +189,6 @@ public class ContactController {
 			model.addAttribute("infoMsg", "Group added successfully.");
 		}
 		
-		model.addAttribute("groupeList", contactService.getAllGroupes());
 		model.addAttribute("contactList", contactService.getAllContacts());
 
 		return "groupeform";
@@ -267,7 +242,6 @@ public class ContactController {
 		
 		contactService.updateGroupe(groupe);
 
-		model.addAttribute("groupeList", contactService.getAllGroupes());
 		
 		return "redirect:/manageGroupes";
 
